@@ -142,7 +142,7 @@ export class AppComponent implements OnInit {
               text: "Gracias por confirmar",
               icon: "success"
             }).then(() => {
-                window.location.href = 'https://juvenmezaa3.wixsite.com/my-site-1';
+                window.location.href = 'https://www.ajboda.site/';
             });
           }, error => {
             Swal.fire({
