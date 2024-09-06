@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
     }
 
     cargarCsv() {
-        this.http.get<any[]>('http://localhost:3000/api/consultar-csv')
+        this.http.get<any[]>('https://confirmacion-back.onrender.com/api/consultar-csv')
           .subscribe(data => {
             this.csvData = data;
           }, error => {
@@ -157,6 +157,6 @@ export class AppComponent implements OnInit {
         const body = { buscarPor, nuevoValor };
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        return this.http.post<any>('http://localhost:3000/api/modificar-csv', body, { headers });
+        return this.http.post<any>('https://confirmacion-back.onrender.com/api/modificar-csv', body, { headers });
     }
 }
