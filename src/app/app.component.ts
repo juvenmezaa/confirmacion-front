@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     numbers: number[] = [];
     datosForm!: FormGroup;
     nombre!: string;
+    loading: boolean = false;
 
     csvData: any[] = [];
     hideCel: boolean = true;
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cargarCsv();
+        //this.cargarCsv();
         this.updateCountdown();
         this.ngZone.runOutsideAngular(()=>{
             setInterval(() => {
@@ -61,8 +62,7 @@ export class AppComponent implements OnInit {
             this.numberFromUrl = +params['celular'] || null;
             if(this.numberFromUrl != null) {
                 this.datosForm.get("celular")?.setValue(this.numberFromUrl);
-                let datos = this.buscarNombre(this.numberFromUrl);
-                this.cargarNombre(datos);
+                let datos = this.buscarCelular(this.numberFromUrl);
             } else {
                 this.hideCel = false;
             }
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
     }
 
     cargarNombre(datos: any) {
-        if(datos.nombre != null) {
+        if(datos != null) {
             this.nombre = datos.nombre;
             this.numbers = Array.from({length: (datos.pases-0+1)}, (_, index) => index);
             this.hideCel = true;
@@ -111,17 +111,34 @@ export class AppComponent implements OnInit {
     return {nombre : null};
   }
 
-  buscarCelular() {
-    let datos = this.buscarNombre(this.datosForm.get("celular")?.value);
-    if(datos.nombre == null) {
-        Swal.fire({
-          title: "Error",
-          text: "No se encontró nadie con ese número",
-          icon: "error"
-        });
+  buscarCelular(celular: any) {
+    this.loading = true;
+    let body = {};
+    if(celular == null) {
+        body = { buscarPor: this.datosForm.get("celular")?.value };
     } else {
-        this.cargarNombre(datos);
+        body = { buscarPor: ''+celular };
     }
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.post<any>('http://localhost:4000/api/consultar', body, { headers })
+          .subscribe(data => {
+            if (data == null) {
+                Swal.fire({
+                  title: "Error",
+                  text: "No se encontró nadie con ese número",
+                  icon: "error"
+                });
+            } else {
+                this.cargarNombre(data);
+            }
+            this.loading = false;
+          }, error => {
+            console.error('Error al consultar el archivo CSV', error);
+            this.loading = false;
+          });
+
+    
   }
 
 
@@ -136,6 +153,7 @@ export class AppComponent implements OnInit {
     }
 
     onSubmit() {
+        this.loading = true;
         this.modificarCSV(this.datosForm.get("celular")?.value, this.datosForm.get("pases")?.value).subscribe(data => {
             Swal.fire({
               title: "Confirmación exitosa",
@@ -144,12 +162,15 @@ export class AppComponent implements OnInit {
             }).then(() => {
                 window.location.href = 'https://www.ajboda.site/';
             });
+            this.loading = false;
+
           }, error => {
             Swal.fire({
               title: "Error",
               text: "Ocurrio un error, intente de nuevo",
               icon: "error"
             });
+            this.loading = false;
           });;
     }
 
@@ -157,6 +178,6 @@ export class AppComponent implements OnInit {
         const body = { buscarPor, nuevoValor };
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        return this.http.post<any>('https://confirmacion-back.onrender.com/api/modificar-csv', body, { headers });
+        return this.http.post<any>('http://localhost:4000/api/modificar', body, { headers });
     }
 }
