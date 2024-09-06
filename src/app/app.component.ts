@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
     }
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    this.http.post<any>('http://localhost:4000/api/consultar', body, { headers })
+    this.http.post<any>('https://confirmacion-back.onrender.com/api/consultar', body, { headers })
           .subscribe(data => {
             if (data == null) {
                 Swal.fire({
@@ -178,6 +178,6 @@ export class AppComponent implements OnInit {
         const body = { buscarPor, nuevoValor };
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        return this.http.post<any>('http://localhost:4000/api/modificar', body, { headers });
+        return this.http.post<any>('https://confirmacion-back.onrender.com/api/modificar', body, { headers });
     }
 }
