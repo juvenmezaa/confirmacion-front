@@ -15,7 +15,7 @@
                     <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="10" formControlName="celular">
                 </div>
                 <div [hidden]="this.hideCel">
-                    <a (click)="buscarCelular()" class="btn btn-outline-info btn-lg">Buscar</a>
+                    <a (click)="buscarCelular()" class="btn btn-secondary btn-lg">Buscar</a>
                 </div>
                 <div class="dropdown" [hidden]="!this.hideCel"> 
                     <label>Seleccione el número de pases:</label>
@@ -26,7 +26,7 @@
             </form>
 
             <div class="submit-button" [hidden]="!this.hideCel">
-                <button (click)="onSubmit()" [disabled]="!this.datosForm.valid" class="btn btn-outline-info btn-lg">Confirmar</button>
+                <button (click)="onSubmit()" [disabled]="!this.datosForm.valid" class="btn btn-secondary btn-lg">Confirmar</button>
             </div>
         </div>
     </div>
