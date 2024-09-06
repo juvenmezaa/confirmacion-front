@@ -1,5 +1,8 @@
 .content {
   background-image: url('https://static.wixstatic.com/media/06d575_e362c1c0b8b947eebb58a41934d7ddf7~mv2.jpeg/v1/fill/w_1519,h_940,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/06d575_e362c1c0b8b947eebb58a41934d7ddf7~mv2.jpeg');
+  background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+  background-position: center; /* Centra la imagen en el contenedor */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
   padding-top: 5%;
   color: black;
 }
