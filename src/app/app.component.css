@@ -1,0 +1,38 @@
+.content {
+  margin-top: 5%;
+  color: black;
+}
+.background {
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.countdown-timer h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.greeting h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  margin-bottom: 20px;
+}
+
+.submit-button button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.imagen {
+  background-image: url('https://static.wixstatic.com/media/06d575_e362c1c0b8b947eebb58a41934d7ddf7~mv2.jpeg/v1/fill/w_1519,h_940,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/06d575_e362c1c0b8b947eebb58a41934d7ddf7~mv2.jpeg');
+  
+}
