@@ -75,6 +75,7 @@ export class AppComponent implements OnInit {
             this.numbers = Array.from({length: (datos.pases-0+1)}, (_, index) => index);
             this.hideCel = true;
             if(datos.confirmados >= 0) {
+                this.datosForm.get("pases")?.setValue(datos.confirmados);
                 Swal.fire({
                   title: "Info",
                   text: "Ya se encuentra una confirmación, esta se actualizara",
