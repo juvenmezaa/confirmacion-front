@@ -15,7 +15,7 @@
                     <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="10" formControlName="celular">
                 </div>
                 <div [hidden]="this.hideCel">
-                    <a (click)="buscarCelular(null)" class="btn btn-secondary btn-lg">
+                    <a (click)="this.loading ? $event.preventDefault() : buscarCelular(null)" class="btn btn-secondary btn-lg">
                         <div class="spinner-border" role="status" [hidden]="!this.loading">
                         </div>
                         <label [hidden]="this.loading">
@@ -32,7 +32,7 @@
             </form>
 
             <div class="submit-button" [hidden]="!this.hideCel">
-                <button (click)="onSubmit()" [disabled]="!this.datosForm.valid" class="btn btn-secondary btn-lg">
+                <button (click)="onSubmit()" [disabled]="!this.datosForm.valid || this.loading" class="btn btn-secondary btn-lg">
                     <div class="spinner-border" role="status" [hidden]="!this.loading">
                     </div>
                     <label [hidden]="this.loading">
