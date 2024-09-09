@@ -49,6 +49,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         //this.cargarCsv();
+        let body = { buscarPor: '6671978876' };
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        this.http.post<any>('https://confirmacion-back.onrender.com/api/consultar', body, { headers }).subscribe(()=>{});
         this.updateCountdown();
         this.ngZone.runOutsideAngular(()=>{
             setInterval(() => {
