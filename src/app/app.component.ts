@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     csvData: any[] = [];
     hideCel: boolean = true;
 
-    private targetDate: Date = new Date('2024-10-11T18:00:00');
+    private targetDate: Date = new Date('2025-03-21T20:00:00');
 
     constructor(private ngZone: NgZone, 
         private route: ActivatedRoute,
@@ -49,9 +49,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         //this.cargarCsv();
-        let body = { buscarPor: '6671978876' };
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        this.http.post<any>('https://confirmacion-back.onrender.com/api/consultar', body, { headers }).subscribe(()=>{});
+        //let body = { buscarPor: '6671978876' };
+        //let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        //this.http.post<any>('https://confirmacion-back.onrender.com/api/consultar', body, { headers }).subscribe(()=>{});
         this.updateCountdown();
         this.ngZone.runOutsideAngular(()=>{
             setInterval(() => {
